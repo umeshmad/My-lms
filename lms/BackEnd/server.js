@@ -35,11 +35,11 @@ app.post('/login',(req,res)=>{
     const username=req.body.username;
     const password=req.body.password;
 
-    conn.query("SELECT * FROM users WHERE username=? password=?",[username,password],
+    conn.query("SELECT * FROM users WHERE username=? AND password=?",[username,password],
         (err,result)=>{
             if(err){
                 console.error(err);
-                res.statrus(500).send({message:"server error"});
+                res.status(500).send({message:"server error"});
             }else{
                 if(result.length>0){
                     res.send(result);

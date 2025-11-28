@@ -9,11 +9,25 @@ export default function Register() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword]=useState("");
   const [registerStatus, setRegisterStatus] = useState("");
+  const [agreeTerms, setAgreeTerms]=useState(false);
 
   const register=(e)=>{
     e.preventDefault();
-    axios.post("http//localhost:3001/register",{
+    if(username.length ===0 || fullname.length ===0 || email.length===0 || password.length===0){
+      setRegisterStatus("Please enter the details for signup");
+      return;
+    }
+    if(password !== confirmPassword){
+      setRegisterStatus("Password Does not match");
+      return;
+    }
+    if(agreeTerms===false){
+      setRegisterStatus("Please agree to the terms and conditions");
+      return;
+    }
+    axios.post("http://localhost:3001/register",{
       fullname:fullname,
       email:email,
       username:username,
@@ -69,10 +83,10 @@ export default function Register() {
             <span className="size-2 rounded-full bg-teal-600"></span>
             Confirm Password
           </label>
-          <input id="confirmPassword" type="password" placeholder="Confirm your password" className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
+          <input id="confirmPassword" type="password" placeholder="Confirm your password" onChange={(e)=>{setConfirmPassword(e.target.value)}} className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
         </div>
         <div className="flex items-center mb-5 flex-wrap">
-          <input id="terms" type="checkbox" className="size-4 accent-teal-600 cursor-pointer" />
+          <input id="terms" type="checkbox" onChange={(e)=>{setAgreeTerms(e.target.checked)}} className="size-4  accent-teal-600 cursor-pointer" />
           <label htmlFor="terms" className="ml-2 text-sm text-gray-600 cursor-pointer select-none">
             I agree to the
           </label>
@@ -96,10 +110,7 @@ export default function Register() {
         >
           Sign Up
         </button>
-          {registerStatus && (
-            <p className="text-center text-green-600 font-semibold mt-4">
-              {registerStatus}
-            </p>
+          {registerStatus && (<p className="text-center text-green-600 font-semibold mt-4">{registerStatus}</p>
           )}
         <div className="flex items-center my-6">
           <div className="grow h-px bg-gray-300"></div>

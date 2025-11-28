@@ -2,12 +2,33 @@ import React from 'react';
 import logo from '../assets/navlogo.png';
 import google from '../assets/google.png';
 import facebook from '../assets/facebook.png';
+import {useState} from 'react';
+import axios from 'axios';
 
 export default function Login() {
+  const [username, setUserName]=useState("");
+  const [password, setPassword]=useState("");
+  const [loginstatus, setLoginStatus]=useState("");
+
+  const login=(e)=>{
+    e.preventDefault();
+    axios.post('http://localhost:3001/login',{
+      username:username,
+      password:password,
+    }).then((response)=>{
+      if(response.data.message){
+        setLoginStatus(response.data.message);
+      }else{
+        setLoginStatus("Login Successful");
+      }
+
+    })
+  }
+
   return (
     <div>
       <div className="min-h-screen flex justify-center items-center bg-linear-to-br from-[#D5ECE9] via-[#A8DADC] to-[#EAF3F1]">
-        <form className="shadow-2xl bg-white rounded-2xl w-[420px] p-10 border border-gray-100">
+        <form onSubmit={login} className="shadow-2xl bg-white rounded-2xl w-[420px] p-10 border border-gray-100">
           
           <div className="flex justify-center">
             <img src={logo} className="w-[150px] h-[150px] object-contain mr-4" />
@@ -23,6 +44,7 @@ export default function Login() {
               <input
                 type="text"
                 placeholder="Enter your username"
+                onChange={(e)=>{setUserName(e.target.value)}}
                 className="border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-600 transition-all"
               />
             </div>
@@ -32,6 +54,7 @@ export default function Login() {
               <input
                 type="password"
                 placeholder="Enter your password"
+                onChange={(e)=>{setPassword(e.target.value)}}
                 className="border-2 border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:border-teal-600 transition-all"
               />
             </div>
@@ -44,7 +67,8 @@ export default function Login() {
                     <a href="#" className="text-teal-600 hover:text-teal-700 font-semibold hover:underline">Forgot password?</a>
                 </div>   
             </div>
-            <button className="text-white bg-linear-to-br from-teal-500 to-teal-700 rounded-lg h-10 font-bold hover:shadow-xl transition-all">Sign In</button>
+            <button type="submit" className="text-white bg-linear-to-br from-teal-500 to-teal-700 rounded-lg h-10 font-bold hover:shadow-xl transition-all">Sign In</button>
+            {loginstatus && (<p className="text-center text-green-600 font-semibold mt-4" >{loginstatus}</p>)}
 
             <div className="relative my-4">
                 <div className="absolute inset-0 flex items-center">
