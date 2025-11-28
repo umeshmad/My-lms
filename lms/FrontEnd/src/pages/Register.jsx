@@ -1,10 +1,34 @@
 import React from 'react';
 import logo from '../assets/navlogo.png';
+import axios from 'axios';
+import {useState} from 'react';
+
 
 export default function Register() {
+  const [fullname, setFullname] = useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [registerStatus, setRegisterStatus] = useState("");
+
+  const register=(e)=>{
+    e.preventDefault();
+    axios.post("http//localhost:3001/register",{
+      fullname:fullname,
+      email:email,
+      username:username,
+      password:password,
+    }).then((response) => {
+      if(response.data.message){
+        setRegisterStatus(response.data.message);
+      }else{
+        setRegisterStatus("Registration Successful");
+      }
+    })
+  }
   return (
     <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-[#D5ECE9] via-[#A8DADC] to-[#EAF3F1]">
-      <form className="bg-white rounded-2xl shadow-2xl w-[440px] px-10 py-8">
+      <form onSubmit={register}  className="bg-white rounded-2xl shadow-2xl w-[440px] px-10 py-8">
         <div className="flex justify-center mb-4">
           <img src={logo} alt="Logo" className="w-36 h-36 object-contain drop-shadow-lg" />
         </div>
@@ -17,28 +41,28 @@ export default function Register() {
             <span className="size-2 rounded-full bg-teal-600"></span>
             Full Name
           </label>
-          <input id="fullname" type="text" placeholder="Enter your full name" className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
+          <input name="fullname" id="fullname" type="text" placeholder="Enter your full name"  onChange={(e)=> {setFullname(e.target.value)}} className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="flex items-center gap-2 mb-2 font-semibold text-gray-700">
             <span className="size-2 rounded-full bg-teal-600"></span>
             Email Address
           </label>
-          <input id="email" type="email" placeholder="Enter your email" className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600 transition-all" />
+          <input name="email" id="email" type="email" placeholder="Enter your email" onChange={(e)=>{setEmail(e.target.value)}} className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600 transition-all" />
         </div>
         <div className="mb-4">
           <label htmlFor="username" className="flex items-center gap-2 mb-2 font-semibold text-gray-700">
             <span className="size-2 rounded-full bg-teal-600"></span>
             User Name
           </label>
-          <input id="username" type="text" placeholder="Choose a user name" className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
+          <input name="username" id="username" type="text" placeholder="Choose a user name" onChange={(e)=>{setUsername(e.target.value)}} className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
         </div>
         <div className="mb-4">
           <label htmlFor="password" className="flex items-center gap-2 mb-2 font-semibold text-gray-700">
             <span className="size-2 rounded-full bg-teal-600"></span>
             Password
           </label>
-          <input id="password" type="password" placeholder="Create a password" className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
+          <input name="password" id="password" type="password" placeholder="Create a password" onChange={(e)=>{setPassword(e.target.value)}} className="border-2 border-gray-300 rounded-lg w-full h-11 px-4 focus:outline-none focus:border-blue-600  transition-all" />
         </div>
         <div className="mb-5">
           <label htmlFor="confirmPassword" className="flex items-center gap-2 mb-2 font-semibold text-gray-700">
@@ -72,6 +96,11 @@ export default function Register() {
         >
           Sign Up
         </button>
+          {registerStatus && (
+            <p className="text-center text-green-600 font-semibold mt-4">
+              {registerStatus}
+            </p>
+          )}
         <div className="flex items-center my-6">
           <div className="grow h-px bg-gray-300"></div>
           <span className="mx-3 text-gray-500 text-sm font-medium">or sign up with</span>
