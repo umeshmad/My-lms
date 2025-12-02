@@ -1,24 +1,28 @@
-import {BrowserRouter as Router, Routes,Route  } from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Homepage from "./pages/Homepage";
 import Course from "./pages/Course";
 import Register from './pages/Register';
 import Login from "./pages/Login";
 import Tuter from "./pages/Tuter";
-import Admin from "./pages/Admin"
+import Admin from "./pages/Admin";
+import Navbar from "./pages/Navbar";
+
 function App() {
- 
   return (
     <>
-      <Login/>
-      <Admin/>
       <Router>
+        <Navbar/>
+
         <Routes>
-          <Route path="/" element={<Homepage/>}/>
-          <Route path="/course" element={<Course/>}/>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/tutor" element={<Tuter />} />
+          <Route path="/course" element={<Course />} />
         </Routes>
+
       </Router>
-   
-   </>
+    </>
   )
 }
 

@@ -4,11 +4,14 @@ import google from '../assets/google.png';
 import facebook from '../assets/facebook.png';
 import {useState} from 'react';
 import axios from 'axios';
+import { useAuth } from './auth';
+import {useNavigate} from 'react-router-dom';
 
 export default function Login() {
   const [username, setUserName]=useState("");
   const [password, setPassword]=useState("");
   const [loginstatus, setLoginStatus]=useState("");
+  const navigate =useNavigate();
 
   const login=(e)=>{
     e.preventDefault();
@@ -20,10 +23,18 @@ export default function Login() {
         setLoginStatus(response.data.message);
       }else{
         setLoginStatus("Login Successful");
+        localStorage.setItem('isLoggedIn','true');
+        localStorage.setItem('user',JSON.stringify(response.data[0]));
+
+        window.dispatchEvent(new Event("storage"));
+        navigate('/');
+
+        
       }
 
     })
   }
+  
 
   return (
     <div>

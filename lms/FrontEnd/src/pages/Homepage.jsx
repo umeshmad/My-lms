@@ -11,17 +11,7 @@ import './Homepage.css';
 export default function Homepage() {
   return (
     <div className="bg-linear-to-r/srgb from-[#e1eceb] to-[#EAF3F1]">
-        <nav className="flex justify-between items-center h-20 px-8 bg-linear-to-r/srgb from-cyan-50 to-blue-50 shadow-2xl">
-        <div className="flex items-center">
-        <img src={logo} alt="logo" className="h-32 w-auto object-contain mr-10 mt-10" />
-        <ul className="flex items-center space-x-10 ml-200 text-[18px] font-bold font-sans text-blue-700">
-          <li className=" hover:border-2 hover:bg-green-200 hover:rounded-[18px] hover:p-2"><Link to="/">Home</Link></li>
-          <li className="hover:border-2 hover:bg-green-200 hover:rounded-[18px] hover:p-2"><Link to="/course">Course</Link></li>
-          <li className="hover:border-2 hover:bg-green-200 hover:rounded-[18px] hover:p-2"><a href="#">Tutor</a></li>
-          <li className="hover:border-2 hover:bg-green-200 hover:rounded-[18px] hover:p-2"><a href="#">News</a></li>
-        </ul>
-      </div>
-     </nav>
+  
     
       <section className="relative h-[600px] bg-linear-to-r/srgb from-[#A8DADC] to-[#EBECE8] justify-between overflow-hidden">
         <div className="z-[-1]">
