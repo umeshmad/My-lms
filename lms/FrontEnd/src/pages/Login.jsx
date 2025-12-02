@@ -4,7 +4,6 @@ import google from '../assets/google.png';
 import facebook from '../assets/facebook.png';
 import {useState} from 'react';
 import axios from 'axios';
-import { useAuth } from './auth';
 import {useNavigate} from 'react-router-dom';
 
 export default function Login() {

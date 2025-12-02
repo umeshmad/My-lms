@@ -13,6 +13,18 @@ export default function Navbar() {
         const userdata=JSON.parse(localStorage.getItem('user'));
         setIsLoggedIn(LoggedIn);
         setUser(userdata);
+
+        const handleStorageChange =()=>{
+            const LoggedIn =localStorage.getItem('isLoggedIn') === 'true';
+            const userdata= JSON.parse(localStorage.getItem('user'));
+            setIsLoggedIn(LoggedIn);
+            setUser(userdata)
+        };
+        window.addEventListener('storage',handleStorageChange);
+
+        return()=>{
+            window.removeEventListener('storage',handleStorageChange);
+        }
     },[]);
     
     const logout = ()=>{
