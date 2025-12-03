@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 export default function Navbar() {
     const [isLoggedIn, setIsLoggedIn]=useState(false);
     const [user, setUser]=useState(null);
+    
     useEffect(()=>{
         const LoggedIn=localStorage.getItem('isLoggedIn')=== 'true';
         const userdata=JSON.parse(localStorage.getItem('user'));

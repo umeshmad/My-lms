@@ -1,8 +1,18 @@
 import React from 'react';
 import logo from '../assets/navlogo.png';
 import {Link} from 'react-router-dom';
+import {useState,useEffect} from 'react';
 
 export default function Course() {
+  const [isCheck, setIsCheck]=useState(false);
+
+  useEffect(()=>{
+    const check=localStorage.getItem('isLoggedIn')=== 'true';
+    setIsCheck(check);
+
+  },[]);
+
+
   return (
     <div className="bg-linear-to-r/srgb from-[#D5ECE9] to-[#EAF3F1] min-h-screen">
       
@@ -29,7 +39,13 @@ export default function Course() {
               </div>
             </div>
             <div className="flex justify-center px-8 py-5"> 
-              <button className="bg-linear-to-br from-teal-600 to-teal-700 flex justify-center items-center w-full  rounded-xl h-9 text-xl text-white font-bold ">Enroll Now</button>
+              <button  onClick={()=>{
+                if(isCheck){
+                  window.location.href="/courseform";
+                }else{
+                  alert("Please login first")
+                }
+              }} className="bg-linear-to-br from-teal-600 to-teal-700 flex justify-center items-center w-full  rounded-xl h-9 text-xl text-white font-bold ">Enroll Now</button>
             </div>
              
           </div>
