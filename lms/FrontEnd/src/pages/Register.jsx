@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../assets/navlogo.png';
 import axios from 'axios';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 
 export default function Register() {
@@ -35,8 +36,12 @@ export default function Register() {
     }).then((response) => {
       if(response.data.message){
         setRegisterStatus(response.data.message);
-      }else{
-        setRegisterStatus("Registration Successful");
+      }
+      if(response.data.message === "Registration Successful"){
+        setTimeout(()=>{
+          window.location.href="/login"
+
+        },3000)
       }
     })
   }
@@ -142,9 +147,9 @@ export default function Register() {
         </div>
         <div className="text-center text-sm text-gray-600">
           Already have an account?{' '}
-          <a href="#" className="text-teal-600 font-bold hover:text-teal-700 hover:underline cursor-pointer transition-colors">
+          <Link to='/login' className="text-teal-600 font-bold hover:text-teal-700 hover:underline cursor-pointer transition-colors">
             Sign In
-          </a>
+          </Link>
         </div>
       </form>
     </div>

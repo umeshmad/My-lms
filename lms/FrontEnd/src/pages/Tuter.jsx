@@ -4,7 +4,7 @@ import person from '../assets/tutor1.png';
 
 export default function Tuter() {
   return (
-    <div>
+    <div className="mt-12">
       
       <div className="grid grid-cols-3 p-12 gap-15 gap-y-15 -mt-15">
 

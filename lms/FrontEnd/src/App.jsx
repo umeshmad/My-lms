@@ -7,6 +7,7 @@ import Tuter from "./pages/Tuter";
 import Admin from "./pages/Admin";
 import Navbar from "./pages/Navbar";
 import CourseForm from './pages/CourseForm';
+import Student from './pages/Student'
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Navbar/>
 
         <Routes>
+          <Route path="/student/:studentId" element={<Student/>}/>
           <Route path="/courseform" element={<CourseForm/>}/>
           <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<Login />} />

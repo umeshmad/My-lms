@@ -1,9 +1,10 @@
 import React from 'react';
 import {useState} from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function CourseForm() {
-
+  const navigate = useNavigate(); 
   const[fullname, setFullname]=useState("");
   const[studentId, setstudentId]=useState("");
   const[email, setEmail]=useState("");
@@ -15,6 +16,11 @@ export default function CourseForm() {
 
   const course=(e)=>{
     e.preventDefault();
+
+    if(fullname.length ===0 || studentId.length ===0 || email.length===0 || selectedCourse.length===0 || educationLevel.length===0 ){
+      setEnrollState("Please enter the details for Enroll");
+      return;
+    }
 
 
 
@@ -30,6 +36,16 @@ export default function CourseForm() {
     }).then((response)=>{
       if(response.data.message){
         setEnrollState(response.data.message);
+      }
+      if(response.data.message === "Enrollment successful"){
+         const studentid=localStorage.setItem("studentId", String(studentId));
+         const enrollStudentId=studentId;
+         setTimeout(()=>{
+
+          navigate(`/student/${enrollStudentId}`);
+
+         },3000);
+         
       }
 
     })

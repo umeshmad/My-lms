@@ -5,6 +5,7 @@ import facebook from '../assets/facebook.png';
 import {useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 export default function Login() {
   const [username, setUserName]=useState("");
@@ -107,7 +108,7 @@ export default function Login() {
                 </div>
                 <div className="flex justify-center gap-1 text-gray-600">
                     <p>Don't have an account?</p>
-                    <a href="#" className="text-teal-600 font-bold hover:text-teal-700 hover:underline">Sign Up</a>
+                    <Link to = '/register' className="text-teal-600 font-bold hover:text-teal-700 hover:underline">Sign Up</Link>
                 </div>
             </div>
 
